@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Up - CardioRisk AI Cardiovascular Disease Prediction</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="app-background">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <div class="container">
+
+        <!-- ================================================= -->
+        <!-- HEADER & NAVIGATION -->
+        <!-- ================================================= -->
+        <header class="navbar">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-heart-pulse logo-icon"></i>
+                <span class="logo-text">
+                    CardioRisk
+                    <span class="badge-ai">AI</span>
+                </span>
+            </a>
+
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="about.html" class="nav-link"><i class="fa-solid fa-circle-info"></i> About</a>
+                <a href="checkup.html" class="nav-link active"><i class="fa-solid fa-stethoscope"></i> Check Up</a>
+            </nav>
+
+            <div class="server-status" id="serverStatus">
+                <span class="status-dot"></span>
+                <span class="status-text">Checking Backend...</span>
+            </div>
+        </header>
+
+        <!-- ================================================= -->
+        <!-- MAIN PREDICTION SECTION -->
+        <!-- ================================================= -->
+        <main class="main-grid">
+
+            <!-- ================================================= -->
+            <!-- LEFT FORM -->
+            <!-- ================================================= -->
+            <section class="card form-card">
+
+                <div class="card-header">
+                    <h2>
+                        <i class="fa-solid fa-notes-medical"></i>
+                        Patient Assessment
+                    </h2>
+                    <p class="subtitle">
+                        Enter health metrics to evaluate cardiovascular disease risk
+                    </p>
+                </div>
+
+                <form id="predictionForm" class="prediction-form">
+
+                    <!-- ========================================= -->
+                    <!-- DEMOGRAPHIC -->
+                    <!-- ========================================= -->
+                    <div class="form-section-title">
+                        <i class="fa-solid fa-user-doctor"></i>
+                        Demographic Factors
+                    </div>
+
+                    <div class="form-row grid-2">
+                        <div class="input-group">
+                            <label for="age">
+                                <i class="fa-solid fa-calendar-days"></i>
+                                Age (Years)
+                            </label>
+                            <input
+                                type="number"
+                                id="age"
+                                name="age"
+                                min="1"
+                                max="120"
+                                placeholder="Enter age"
+                                required
+                            >
+                        </div>
+
+                        <div class="input-group">
+                            <label for="gender">
+                                <i class="fa-solid fa-venus-mars"></i>
+                                Gender
+                            </label>
+                            <select id="gender" name="gender" required>
+                                <option value="" disabled selected>Select Gender</option>
+                                <option value="1">Female</option>
+                                <option value="2">Male</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- ========================================= -->
+                    <!-- BODY -->
+                    <!-- ========================================= -->
+                    <div class="form-section-title">
+                        <i class="fa-solid fa-ruler-combined"></i>
+                        Physical Metrics
+                    </div>
+
+                    <div class="form-row grid-2">
+                        <div class="input-group">
+                            <label for="height">
+                                <i class="fa-solid fa-text-height"></i>
+                                Height (cm)
+                            </label>
+                            <input
+                                type="number"
+                                id="height"
+                                name="height"
+                                min="50"
+                                max="250"
+                                step="0.1"
+                                placeholder="Enter height"
+                                required
+                            >
+                        </div>
+
+                        <div class="input-group">
+                            <label for="weight">
+                                <i class="fa-solid fa-weight-scale"></i>
+                                Weight (kg)
+                            </label>
+                            <input
+                                type="number"
+                                id="weight"
+                                name="weight"
+                                min="10"
+                                max="300"
+                                step="0.1"
+                                placeholder="Enter weight"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <div class="bmi-live-preview">
+                        <span>
+                            Calculated BMI:
+                            <strong id="liveBmi">-- kg/m²</strong>
+                        </span>
+                        <span class="bmi-badge warning" id="liveBmiBadge">--</span>
+                    </div>
+
+                    <!-- ========================================= -->
+                    <!-- CLINICAL VITALS -->
+                    <!-- ========================================= -->
+                    <div class="form-section-title">
+                        <i class="fa-solid fa-stethoscope"></i>
+                        Clinical Vitals
+                    </div>
+
+                    <div class="form-row grid-2">
+                        <div class="input-group">
+                            <label for="ap_hi">
+                                <i class="fa-solid fa-heart-circle-bolt"></i>
+                                Systolic BP
+                            </label>
+                            <input
+                                type="number"
+                                id="ap_hi"
+                                name="ap_hi"
+                                min="60"
+                                max="250"
+                                placeholder="e.g. 120"
+                                required
+                            >
+                            <small class="hint">Normal: &lt; 120 mmHg</small>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="ap_lo">
+                                <i class="fa-solid fa-heart-circle-check"></i>
+                                Diastolic BP
+                            </label>
+                            <input
+                                type="number"
+                                id="ap_lo"
+                                name="ap_lo"
+                                min="40"
+                                max="200"
+                                placeholder="e.g. 80"
+                                required
+                            >
+                            <small class="hint">Normal: &lt; 80 mmHg</small>
+                        </div>
+                    </div>
+
+                    <!-- ========================================= -->
+                    <!-- CHOLESTEROL + GLUCOSE -->
+                    <!-- ========================================= -->
+                    <div class="form-row grid-2">
+                        <div class="input-group">
+                            <label for="cholesterol">
+                                <i class="fa-solid fa-droplet"></i>
+                                Cholesterol Level
+                            </label>
+                            <select id="cholesterol" name="cholesterol" required>
+                                <option value="1">1 - Normal</option>
+                                <option value="2">2 - Above Normal</option>
+                                <option value="3">3 - Well Above Normal</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="gluc">
+                                <i class="fa-solid fa-cubes-stacked"></i>
+                                Glucose Level
+                            </label>
+                            <select id="gluc" name="gluc" required>
+                                <option value="1">1 - Normal</option>
+                                <option value="2">2 - Above Normal</option>
+                                <option value="3">3 - Well Above Normal</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- ========================================= -->
+                    <!-- LIFESTYLE -->
+                    <!-- ========================================= -->
+                    <div class="form-section-title">
+                        <i class="fa-solid fa-person-running"></i>
+                        Lifestyle Behaviors
+                    </div>
+
+                    <div class="form-row grid-3">
+                        <div class="checkbox-card">
+                            <input type="checkbox" id="smoke" name="smoke">
+                            <label for="smoke">
+                                <i class="fa-solid fa-smoking"></i>
+                                <span>Smoker</span>
+                            </label>
+                        </div>
+
+                        <div class="checkbox-card">
+                            <input type="checkbox" id="alco" name="alco">
+                            <label for="alco">
+                                <i class="fa-solid fa-wine-glass"></i>
+                                <span>Alcohol</span>
+                            </label>
+                        </div>
+
+                        <div class="checkbox-card">
+                            <input type="checkbox" id="active" name="active" checked>
+                            <label for="active">
+                                <i class="fa-solid fa-dumbbell"></i>
+                                <span>Active</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- ========================================= -->
+                    <!-- SUBMIT -->
+                    <!-- ========================================= -->
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa-solid fa-microchip"></i>
+                        Analyze Cardiac Risk
+                    </button>
+
+                </form>
+
+            </section>
+
+            <!-- ================================================= -->
+            <!-- RIGHT RESULTS -->
+            <!-- ================================================= -->
+            <section class="results-container">
+
+                <!-- ============================================= -->
+                <!-- EMPTY -->
+                <!-- ============================================= -->
+                <div class="card result-card empty-state" id="emptyState">
+                    <div class="empty-icon">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+                    <h3>Ready for Assessment</h3>
+                    <p>
+                        Fill out the clinical parameters and click
+                        <strong>Analyze Cardiac Risk</strong>
+                        to generate an AI risk prediction.
+                    </p>
+                </div>
+
+                <!-- ============================================= -->
+                <!-- LOADING -->
+                <!-- ============================================= -->
+                <div class="card result-card loading-state hidden" id="loadingState">
+                    <div class="spinner"></div>
+                    <p>
+                        Processing patient clinical data with Machine Learning Model...
+                    </p>
+                </div>
+
+                <!-- ============================================= -->
+                <!-- RESULT -->
+                <!-- ============================================= -->
+                <div class="card result-card hidden" id="resultContent">
+
+                    <div class="result-header">
+                        <span class="pill-label">ML Prediction Result</span>
+                        <h2 id="riskLabel">Cardiovascular Risk Score</h2>
+                    </div>
+
+                    <!-- GAUGE -->
+                    <div class="gauge-section">
+                        <div class="gauge-ring" id="gaugeRing">
+                            <div class="gauge-value" id="riskPercent">0%</div>
+                            <div class="gauge-subtitle">Risk Probability</div>
+                        </div>
+                    </div>
+
+                    <!-- BADGE -->
+                    <div class="risk-badge-box" id="riskBadgeBox">
+                        <i class="fa-solid fa-shield-heart"></i>
+                        <span id="riskBadgeText">Risk Result</span>
+                    </div>
+
+                    <!-- METRICS -->
+                    <div class="metrics-grid">
+                        <div class="metric-box">
+                            <div class="metric-icon">
+                                <i class="fa-solid fa-scale-balanced"></i>
+                            </div>
+                            <div class="metric-info">
+                                <span class="metric-title">BMI</span>
+                                <span class="metric-val" id="resBmi">--</span>
+                                <span class="metric-sub" id="resBmiCat">--</span>
+                            </div>
+                        </div>
+
+                        <div class="metric-box">
+                            <div class="metric-icon">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                            <div class="metric-info">
+                                <span class="metric-title">Blood Pressure</span>
+                                <span class="metric-val" id="resBp">--/--</span>
+                                <span class="metric-sub" id="resBpCat">--</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RECOMMENDATIONS -->
+                    <div class="recommendations-box">
+                        <h4>
+                            <i class="fa-solid fa-list-check"></i>
+                            Clinical Recommendations
+                        </h4>
+                        <ul id="recommendationsList"></ul>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+        <footer class="site-footer">
+            <p>CardioRisk AI &copy; Cardiovascular Health Predictor &mdash; Machine Learning Clinical Assessment System</p>
+        </footer>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+
+
+{
+  "name": "ml-frontend",
+  "version": "1.0.0",
+  "scripts": {
+    "backend": "python backend/app.py",
+    "frontend": "http-server frontend -p 5500",
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\""
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.5",
+    "http-server": "^14.1.1"
+  }
+}
