@@ -23,17 +23,23 @@ BASE_DIR = os.path.dirname(
     os.path.abspath(__file__)
 )
 
+def _find_file(filename):
+    candidates = [
+        os.path.join(BASE_DIR, filename),
+        os.path.join(os.getcwd(), "api", filename),
+        os.path.join(os.getcwd(), "backend", filename),
+        os.path.join(os.getcwd(), filename),
+        os.path.join(os.path.dirname(BASE_DIR), "api", filename),
+        os.path.join(os.path.dirname(BASE_DIR), "backend", filename),
+        os.path.join(os.path.dirname(BASE_DIR), filename),
+    ]
+    for p in candidates:
+        if os.path.exists(p):
+            return p
+    return candidates[0]
 
-MODEL_PATH = os.path.join(
-    BASE_DIR,
-    "cardio_model.pkl"
-)
-
-
-SCALER_PATH = os.path.join(
-    BASE_DIR,
-    "scaler.pkl"
-)
+MODEL_PATH = _find_file("cardio_model.pkl")
+SCALER_PATH = _find_file("scaler.pkl")
 
 
 # ============================================================
