@@ -1,4 +1,8 @@
-const API_BASE_URL = "http://127.0.0.1:5000";
+// Automatically use current origin in production (Vercel), or local Flask server during development
+const API_BASE_URL =
+    window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+        ? "http://127.0.0.1:5000"
+        : "";
 
 
 document.addEventListener(

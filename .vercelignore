@@ -1,0 +1,6 @@
+﻿backend/cardio_train.csv
+task4.ipynb
+node_modules/
+.git
+.vscode
+cardio_model.pkl
