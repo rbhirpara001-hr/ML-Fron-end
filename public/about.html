@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - CardioRisk AI Cardiovascular Disease Prediction</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="app-background">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <div class="container">
+
+        <!-- ================================================= -->
+        <!-- HEADER & NAVIGATION -->
+        <!-- ================================================= -->
+        <header class="navbar">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-heart-pulse logo-icon"></i>
+                <span class="logo-text">
+                    CardioRisk
+                    <span class="badge-ai">AI</span>
+                </span>
+            </a>
+
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="about.html" class="nav-link active"><i class="fa-solid fa-circle-info"></i> About</a>
+                <a href="checkup.html" class="nav-link"><i class="fa-solid fa-stethoscope"></i> Check Up</a>
+            </nav>
+
+            <div class="server-status" id="serverStatus">
+                <span class="status-dot"></span>
+                <span class="status-text">Checking Backend...</span>
+            </div>
+        </header>
+
+        <!-- ================================================= -->
+        <!-- ABOUT PAGE CONTENT -->
+        <!-- ================================================= -->
+        <main>
+            <!-- ABOUT HEADER -->
+            <div class="card about-header-card">
+                <div class="hero-badge-pill">
+                    <i class="fa-solid fa-book-open"></i> Project Documentation
+                </div>
+                <h1 class="hero-title" style="font-size: 2.25rem; margin-bottom: 12px;">
+                    About <span>CardioRisk AI</span>
+                </h1>
+                <p class="hero-subtitle" style="margin-bottom: 0; font-size: 1.05rem;">
+                    A comprehensive overview of the system architecture, clinical input biomarkers, 
+                    Machine Learning algorithms, data preprocessing, model training, and prediction pipeline.
+                </p>
+            </div>
+
+            <!-- ================================================= -->
+            <!-- SECTION A: ABOUT THE PROJECT -->
+            <!-- ================================================= -->
+            <section class="about-section">
+                <div class="about-section-header">
+                    <i class="fa-solid fa-diagram-project"></i>
+                    <h2>A. About The Project</h2>
+                </div>
+                <p>
+                    <strong>CardioRisk AI</strong> is an applied Machine Learning healthcare web application designed to evaluate a patient's risk of developing <strong>Cardiovascular Disease (CVD)</strong>. The system provides an accessible, non-invasive screening interface that estimates cardiac disease risk in real time based on routinely gathered health vitals and lifestyle indicators.
+                </p>
+                <div class="about-highlight-box">
+                    <strong>Project Purpose:</strong> Traditional cardiac diagnostic screenings can be costly, time-consuming, and inaccessible for routine check-ups. This project demonstrates how modern supervised Machine Learning algorithms can assist clinical decision-making by rapidly identifying high-risk individuals from standard biometric data, encouraging timely consultation with certified healthcare professionals.
+                </div>
+                <p>
+                    <strong>How Machine Learning is Used:</strong> The system feeds 11 standardized clinical vitals into a trained binary classification model. Rather than relying on rigid manual threshold rules, the model learns complex multivariate patterns and non-linear relationships from thousands of real-world patient records, estimating both the categorical risk class (Low vs. High Risk) and a calibrated probability score.
+                </p>
+            </section>
+
+            <!-- ================================================= -->
+            <!-- SECTION B: WHAT IS CARDIOVASCULAR DISEASE? -->
+            <!-- ================================================= -->
+            <section class="about-section">
+                <div class="about-section-header">
+                    <i class="fa-solid fa-heart-crack"></i>
+                    <h2>B. What is Cardiovascular Disease?</h2>
+                </div>
+                <p>
+                    <strong>Cardiovascular Disease (CVD)</strong> refers to a broad spectrum of disorders affecting the heart and blood vessels. These include coronary artery disease, cerebrovascular disease, hypertension, peripheral arterial disease, and heart failure.
+                </p>
+                <p>
+                    <strong>Why it is Important:</strong> Cardiovascular diseases are the leading cause of mortality globally. Many cardiac conditions develop silently over several years through the gradual accumulation of fatty deposits (atherosclerosis) inside arterial walls without noticeable early symptoms.
+                </p>
+                <p>
+                    <strong>Why Early Risk Prediction is Useful:</strong> When identified at an early or pre-symptomatic stage, cardiovascular risk can often be substantially reduced or reversed through proactive lifestyle modifications, dietary changes, regular aerobic activity, and medical therapies. Automated risk prediction empowers individuals and practitioners to intervene before acute cardiovascular events occur.
+                </p>
+                <p>
+                    <strong>Primary Contributing Factors:</strong> Key risk determinants include advancing age, elevated systolic and diastolic blood pressure, elevated blood cholesterol and glucose levels, excessive body mass index (BMI), tobacco smoking, alcohol abuse, and physical inactivity.
+                </p>
+            </section>
+
+            <!-- ================================================= -->
+            <!-- SECTION C: INPUT PARAMETERS -->
+            <!-- ================================================= -->
+            <section class="about-section">
+                <div class="about-section-header">
+                    <i class="fa-solid fa-sliders"></i>
+                    <h2>C. Actual Input Parameters</h2>
+                </div>
+                <p>
+                    Our prediction system evaluates exactly <strong>11 clinical parameters</strong> corresponding to the features utilized during model training. No parameters are assumed or fabricated; each represents an established cardiovascular indicator:
+                </p>
+
+                <div class="param-grid">
+                    <!-- 1. AGE -->
+                    <div class="param-card">
+                        <div class="param-top">
+                            <i class="fa-solid fa-calendar-days param-icon"></i>
+                            <span class="param-code">age</span>
+                        </div>
+                        <span class="param-type-badge">Demographic &bull; Integer (Years)</span>
+                        <h4>Age</h4>
+                        <p>Patient chronological age in years. Vascular elasticity decreases and arterial plaque accumulates with age, making it one of the strongest non-modifiable cardiovascular risk factors.</p>
+                    </div>
+
+                    <!-- 2. GENDER -->
+                    <div class="param-card">
+                        <div class="param-top">
+                            <i class="fa-solid fa-venus-mars param-icon"></i>
+                            <span class="param-code">gender</span>
+                        </div>
+                        <span class="param-type-badge">Demographic &bull; Binary (1: Female, 2: Male)</span>
+                        <h4>Gender</h4>
+                        <p>Biological sex. Men statistically exhibit earlier onset of coronary artery disease, whereas cardiovascular risk in females rises notably post-menopause due to hormonal shifts.</p>
+                    </div>
+
+                    <!-- 3. HEIGHT -->
+                    <div class="param-card">
+                        <div class="param-top">
+                            <i class="fa-solid fa-ruler-vertical param-icon"></i>
+                            <span class="param-code">height</span>
+                        </div>
+                        <span class="param-type-badge">Biometric &bull; Float (cm)</span>
+                        <h4>Height</h4>
+                        <p>Standing height in centimeters. Combined with weight to calculate Body Mass Index (BMI) and evaluate proportional body surface area.</p>
+                    </div>
+
+                    <!-- 4. WEIGHT -->
+                    <div class="param-card">
+                        <div class="param-top">
+                            <i class="fa-solid fa-weight-scale param-icon"></i>
+                            <span class="param-code">weight</span>
+                        </div>
+                        <span class="param-type-badge">Biometric &bull; Float (kg)</span>
+                        <h4>Weight</h4>
+                        <p>Total body mass in kilograms. Essential for computing BMI and identifying obesity, which strains myocardial workload and correlates with metabolic syndrome.</p>
+                    </div>
+
+                    <!-- 5. SYSTOLIC BP -->
+                    <div class="param-card">
+                        <div class="param-top">
+                            <i class="fa-solid fa-heart-circle-bolt param-icon"></i>
+                            <span class="param-code">ap_hi</span>
+                        </div>
+                        <span class="param-type-badge">Clinical Vital &bull; Integer (mmHg)</span>
+                        <h4>Systolic Blood Pressure</h4>
+                        <p>Peak pressure exerted against arterial walls during ventricular contraction. Values above 120 mmHg indicate pre-hypertension, while sustained values &ge; 130 mmHg directly damage arterial lining.</p>
+                    </div>
+
+                    <!-- 6. DIASTOLIC BP -->
+                    <div class="param-card">
+                        <div class="param-top">
+                            <i class="fa-solid fa-heart-circle-check param-icon"></i>
+                            <span class="param-code">ap_lo</span>
+                        </div>
+                        <span class="param-type-badge">Clinical Vital &bull; Integer (mmHg)</span>
+                        <h4>Diastolic Blood Pressure</h4>
+                        <p>Minimum resting pressure in the arterial system between heartbeats. Elevated diastolic pressure (&ge; 80 mmHg) indicates chronic peripheral vascular resistance.</p>
+                    </div>
+
+                    <!-- 7. CHOLESTEROL -->
+                    <div class="param-card">
+                        <div class="param-top">
+                            <i class="fa-solid fa-droplet param-icon"></i>
+                            <span class="param-code">cholesterol</span>
+                        </div>
+                        <span class="param-type-badge">Biochemical &bull; Ordinal (1: Normal, 2: Above, 3: Well Above)</span>
+                        <h4>Cholesterol Level</h4>
+                        <p>Blood cholesterol category. Hypercholesterolemia leads to lipid deposition in vessel lumens, accelerating atheroma formation and arterial stenosis.</p>
+                    </div>
+
+                    <!-- 8. GLUCOSE -->
+                    <div class="param-card">
+                        <div class="param-top">
+                            <i class="fa-solid fa-cubes-stacked param-icon"></i>
+                            <span class="param-code">gluc</span>
+                        </div>
+                        <span class="param-type-badge">Biochemical &bull; Ordinal (1: Normal, 2: Above, 3: Well Above)</span>
+                        <h4>Glucose Level</h4>
+                        <p>Fasting blood sugar category. Elevated blood glucose promotes endothelial inflammation, accelerates vessel stiffening, and is a hallmark of diabetic cardiomyopathy.</p>
+                    </div>
+
+                    <!-- 9. SMOKING -->
+                    <div class="param-card">
+                        <div class="param-top">
+                            <i class="fa-solid fa-smoking param-icon"></i>
+                            <span class="param-code">smoke</span>
+                        </div>
+                        <span class="param-type-badge">Lifestyle &bull; Binary (0: No, 1: Yes)</span>
+                        <h4>Smoking Status</h4>
+                        <p>Whether the patient regularly smokes tobacco. Inhaled toxins damage arterial endothelium, increase platelet aggregation, and induce acute coronary vasoconstriction.</p>
+                    </div>
+
+                    <!-- 10. ALCOHOL -->
+                    <div class="param-card">
+                        <div class="param-top">
+                            <i class="fa-solid fa-wine-glass param-icon"></i>
+                            <span class="param-code">alco</span>
+                        </div>
+                        <span class="param-type-badge">Lifestyle &bull; Binary (0: No, 1: Yes)</span>
+                        <h4>Alcohol Intake</h4>
+                        <p>Regular consumption of alcoholic beverages. Chronic intake contributes to elevated systemic blood pressure, secondary cardiomyopathy, and cardiac arrhythmias.</p>
+                    </div>
+
+                    <!-- 11. PHYSICAL ACTIVITY -->
+                    <div class="param-card">
+                        <div class="param-top">
+                            <i class="fa-solid fa-person-running param-icon"></i>
+                            <span class="param-code">active</span>
+                        </div>
+                        <span class="param-type-badge">Lifestyle &bull; Binary (0: Inactive, 1: Active)</span>
+                        <h4>Physical Activity</h4>
+                        <p>Engagement in regular physical exercise. Active individuals exhibit superior myocardial efficiency, improved lipid profiles, and reduced cardiovascular mortality.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================================================= -->
+            <!-- SECTION D: MACHINE LEARNING ALGORITHM USED -->
+            <!-- ================================================= -->
+            <section class="about-section">
+                <div class="about-section-header">
+                    <i class="fa-solid fa-microchip"></i>
+                    <h2>D. Machine Learning Algorithm Used</h2>
+                </div>
+                <p>
+                    Based on our project's codebase (<code>backend/train_model.py</code> and serialized model <code>cardio_model.pkl</code>), the machine learning model deployed in this project is:
+                </p>
+
+                <div class="algo-card">
+                    <div class="algo-header">
+                        <div class="algo-name">
+                            <i class="fa-solid fa-square-root-variable"></i>
+                            Logistic Regression (Scikit-Learn)
+                        </div>
+                        <div class="algo-accuracy-badge">
+                            Test Accuracy: ~72.6% &ndash; 73.0%
+                        </div>
+                    </div>
+
+                    <p>
+                        <strong>What the Algorithm Is:</strong> Logistic Regression is a foundational supervised Machine Learning classification algorithm designed to model the probability of a binary outcome (here, the presence or absence of cardiovascular disease: <code>cardio &isin; {0, 1}</code>).
+                    </p>
+
+                    <div class="formula-box">
+                        z = &beta;<sub>0</sub> + &beta;<sub>1</sub>x<sub>1</sub> + &beta;<sub>2</sub>x<sub>2</sub> + &hellip; + &beta;<sub>11</sub>x<sub>11</sub><br>
+                        P(Cardio = 1 | x) = &sigma;(z) = 1 / (1 + e<sup>-z</sup>)
+                    </div>
+
+                    <ul class="algo-details-list">
+                        <li>
+                            <strong>Why it is used in this project:</strong> Logistic Regression provides outstanding interpretability, computational efficiency, and direct probability calibration. Unlike black-box models, it yields an explicit mathematical probability score that directly translates to patient risk assessment.
+                        </li>
+                        <li>
+                            <strong>What it does with input data:</strong> The model computes a weighted linear sum of the 11 standardized clinical features. This linear score \(z\) is passed through the Sigmoid activation function \(\sigma(z)\), mapping the output strictly to a continuous probability interval between 0.0 and 1.0 (0% to 100%).
+                        </li>
+                        <li>
+                            <strong>How it helps in prediction:</strong> By applying a standard clinical decision boundary at threshold 0.50 (50%), any patient with \(P \ge 0.50\) is classified as <strong>High Risk</strong>, while patients with \(P &lt; 0.50\) are classified as <strong>Low Risk</strong>.
+                        </li>
+                        <li>
+                            <strong>Hyperparameters used in code:</strong> Trained with <code>max_iter=2000</code> to ensure complete numerical convergence, and <code>random_state=42</code> for full scientific reproducibility.
+                        </li>
+                        <li>
+                            <strong>Actual Evaluation Performance:</strong> Achieves a consistent test accuracy of <strong>~72.6% to 73.0%</strong> on unseen patient records, demonstrating balanced precision and recall across both healthy and at-risk cohorts.
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- ================================================= -->
+            <!-- SECTION E: DATA PREPROCESSING AND SCALING -->
+            <!-- ================================================= -->
+            <section class="about-section">
+                <div class="about-section-header">
+                    <i class="fa-solid fa-filter"></i>
+                    <h2>E. Data Preprocessing and Scaling</h2>
+                </div>
+                <p>
+                    Effective machine learning requires rigorous preprocessing of raw clinical records before model fitting. The actual techniques applied in our codebase are:
+                </p>
+
+                <!-- 1. SCALING -->
+                <div class="algo-card" style="margin-bottom: 20px;">
+                    <h3 style="color: #38bdf8; font-family: var(--font-heading); margin-bottom: 8px;">
+                        <i class="fa-solid fa-arrows-split-up-and-left"></i> Standard Feature Scaling (StandardScaler)
+                    </h3>
+                    <p>
+                        <strong>Scaling Method:</strong> <code>StandardScaler</code> from <code>sklearn.preprocessing</code>, serialized as <code>scaler.pkl</code>.
+                    </p>
+                    <div class="formula-box">
+                        z = (x - &mu;) / &sigma;
+                    </div>
+                    <ul class="algo-details-list">
+                        <li>
+                            <strong>What it does:</strong> Standardizes features by subtracting the empirical mean \(\mu\) and dividing by the standard deviation \(\sigma\), centering each feature at mean 0 with unit variance 1.
+                        </li>
+                        <li>
+                            <strong>Why scaling is required:</strong> The 11 input parameters have radically different measurement scales (e.g. age: 30&ndash;65 years, systolic BP: 100&ndash;200 mmHg, height: 150&ndash;190 cm, compared to binary flags like smoke or alcohol: 0 or 1). Without scaling, features with large numerical magnitudes would artificially dominate gradient updates and bias the model weights.
+                        </li>
+                        <li>
+                            <strong>Effect on the model:</strong> Ensures uniform gradient descent convergence, prevents coefficient distortion, and guarantees that every biomarker contributes proportionately based on its true diagnostic relevance.
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 2. DATA CLEANING -->
+                <div class="algo-card">
+                    <h3 style="color: #34d399; font-family: var(--font-heading); margin-bottom: 8px;">
+                        <i class="fa-solid fa-broom"></i> Data Cleaning & Unit Transformation
+                    </h3>
+                    <ul class="algo-details-list">
+                        <li>
+                            <strong>Age Conversion:</strong> In the raw dataset, age was originally recorded in days. The training script converts days into standard medical years using <code>df['age'] = np.ceil(df['age'] / 365).astype(int)</code>, aligning it with the years entered on the frontend.
+                        </li>
+                        <li>
+                            <strong>Blood Pressure Outlier Filtering:</strong> Extreme erroneous physiological values caused by sensor or measurement artifacts were filtered: systolic pressure constrained to \(60 \le ap\_hi \le 250\) mmHg and diastolic pressure to \(40 \le ap\_lo \le 200\) mmHg.
+                        </li>
+                        <li>
+                            <strong>Feature Column Selection:</strong> The arbitrary patient identifier column <code>id</code> was removed from the feature matrix so that the model learns purely from diagnostic biomarkers.
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- ================================================= -->
+            <!-- SECTION F: MODEL TRAINING -->
+            <!-- ================================================= -->
+            <section class="about-section">
+                <div class="about-section-header">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <h2>F. Model Training Process</h2>
+                </div>
+                <p>
+                    The machine learning training pipeline implemented in <code>backend/train_model.py</code> follows standard clinical data science methodology:
+                </p>
+                <ul class="algo-details-list">
+                    <li>
+                        <strong>Dataset:</strong> Trained on the widely recognized <em>Cardiovascular Disease Dataset</em> (<code>cardio_train.csv</code>), comprising 70,000 comprehensive patient records.
+                    </li>
+                    <li>
+                        <strong>Train / Test Split:</strong> The cleaned dataset was partitioned into an <strong>80% training set</strong> (56,000 samples) and a <strong>20% testing set</strong> (14,000 samples) using <code>test_size=0.20</code> with <code>stratify=Y</code> (preserving equal proportion of disease-positive and disease-negative samples across splits) and <code>random_state=42</code>.
+                    </li>
+                    <li>
+                        <strong>Fitting the Model:</strong> The <code>StandardScaler</code> was fitted exclusively on <code>X_train</code> to prevent data leakage, and both <code>X_train</code> and <code>X_test</code> were scaled. The Logistic Regression estimator learned the optimal coefficient weights \(\beta\) using maximum likelihood estimation.
+                    </li>
+                    <li>
+                        <strong>Evaluation:</strong> Evaluated on the held-out 20% test dataset using Scikit-Learn's <code>accuracy_score</code> and comprehensive <code>classification_report</code> (assessing Precision, Recall, and F1-Score).
+                    </li>
+                    <li>
+                        <strong>Serialization:</strong> The fitted estimator and scaler were saved using <code>joblib.dump</code> as <code>cardio_model.pkl</code> and <code>scaler.pkl</code> for zero-latency inference during web API requests.
+                    </li>
+                </ul>
+            </section>
+
+            <!-- ================================================= -->
+            <!-- SECTION G: PREDICTION PROCESS (VISUAL FLOW) -->
+            <!-- ================================================= -->
+            <section class="about-section">
+                <div class="about-section-header">
+                    <i class="fa-solid fa-route"></i>
+                    <h2>G. Step-by-Step Prediction Process</h2>
+                </div>
+                <p>
+                    When a patient or practitioner performs an assessment, data traverses the following end-to-end Machine Learning inference pipeline:
+                </p>
+
+                <div class="pipeline-container">
+                    <!-- STEP 1 -->
+                    <div class="pipeline-step">
+                        <div class="step-icon-box">
+                            <i class="fa-solid fa-user-pen"></i>
+                        </div>
+                        <div class="step-content">
+                            <h4>Step 1: Patient Enters Health Metrics</h4>
+                            <p>The user inputs age, gender, height, weight, systolic/diastolic blood pressure, cholesterol, glucose, and lifestyle factors on the Check Up page. Live BMI preview updates automatically.</p>
+                        </div>
+                    </div>
+
+                    <div class="pipeline-connector"><i class="fa-solid fa-arrow-down"></i></div>
+
+                    <!-- STEP 2 -->
+                    <div class="pipeline-step">
+                        <div class="step-icon-box">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                        </div>
+                        <div class="step-content">
+                            <h4>Step 2: Transmission to Flask REST API</h4>
+                            <p>Frontend JavaScript validates the fields and sends an asynchronous JSON POST payload to the backend endpoint <code>/api/predict</code>.</p>
+                        </div>
+                    </div>
+
+                    <div class="pipeline-connector"><i class="fa-solid fa-arrow-down"></i></div>
+
+                    <!-- STEP 3 -->
+                    <div class="pipeline-step">
+                        <div class="step-icon-box">
+                            <i class="fa-solid fa-arrows-rotate"></i>
+                        </div>
+                        <div class="step-content">
+                            <h4>Step 3: StandardScaler Feature Transformation</h4>
+                            <p>The backend validates data bounds and transforms the 11-element feature vector using the pre-fitted <code>scaler.pkl</code>, centering and scaling each biomarker.</p>
+                        </div>
+                    </div>
+
+                    <div class="pipeline-connector"><i class="fa-solid fa-arrow-down"></i></div>
+
+                    <!-- STEP 4 -->
+                    <div class="pipeline-step">
+                        <div class="step-icon-box">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <div class="step-content">
+                            <h4>Step 4: Logistic Regression Model Inference</h4>
+                            <p>The scaled vector is evaluated by <code>cardio_model.pkl</code>. The model computes log-odds and passes them through the Sigmoid function to derive class probability.</p>
+                        </div>
+                    </div>
+
+                    <div class="pipeline-connector"><i class="fa-solid fa-arrow-down"></i></div>
+
+                    <!-- STEP 5 -->
+                    <div class="pipeline-step">
+                        <div class="step-icon-box">
+                            <i class="fa-solid fa-chart-pie"></i>
+                        </div>
+                        <div class="step-content">
+                            <h4>Step 5: Clinical Metric Computation</h4>
+                            <p>The backend calculates BMI and category, evaluates Blood Pressure stage (AHA classification), and generates targeted lifestyle and medical recommendations.</p>
+                        </div>
+                    </div>
+
+                    <div class="pipeline-connector"><i class="fa-solid fa-arrow-down"></i></div>
+
+                    <!-- STEP 6 -->
+                    <div class="pipeline-step">
+                        <div class="step-icon-box">
+                            <i class="fa-solid fa-square-poll-vertical"></i>
+                        </div>
+                        <div class="step-content">
+                            <h4>Step 6: Comprehensive Result Rendered to User</h4>
+                            <p>The frontend renders an animated risk gauge, color-coded risk badge (Low Risk in emerald green vs. High Risk in rose red), BMI & BP status cards, and personalized recommendations.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA -->
+                <div style="text-align: center; margin-top: 32px;">
+                    <a href="checkup.html" class="btn-cta">
+                        <i class="fa-solid fa-stethoscope"></i>
+                        Try the Prediction System Now
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="site-footer">
+            <p>CardioRisk AI &copy; Cardiovascular Health Predictor &mdash; Machine Learning Clinical Assessment System</p>
+        </footer>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

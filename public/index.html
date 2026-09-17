@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CardioRisk AI - Cardiovascular Health Predictor</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="app-background">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <div class="container">
+
+        <!-- ================================================= -->
+        <!-- HEADER & NAVIGATION -->
+        <!-- ================================================= -->
+        <header class="navbar">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-heart-pulse logo-icon"></i>
+                <span class="logo-text">
+                    CardioRisk
+                    <span class="badge-ai">AI</span>
+                </span>
+            </a>
+
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link active"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="about.html" class="nav-link"><i class="fa-solid fa-circle-info"></i> About</a>
+                <a href="checkup.html" class="nav-link"><i class="fa-solid fa-stethoscope"></i> Check Up</a>
+            </nav>
+
+            <div class="server-status" id="serverStatus">
+                <span class="status-dot"></span>
+                <span class="status-text">Checking Backend...</span>
+            </div>
+        </header>
+
+        <!-- ================================================= -->
+        <!-- HERO SECTION -->
+        <!-- ================================================= -->
+        <main>
+            <section class="card hero-card">
+                <div class="hero-badge-pill">
+                    <i class="fa-solid fa-microchip"></i>
+                    Machine Learning Healthcare Project
+                </div>
+
+                <h1 class="hero-title">
+                    CardioRisk <span>AI</span>
+                </h1>
+
+                <p class="hero-subtitle">
+                    An intelligent clinical risk prediction system powered by Machine Learning. 
+                    CardioRisk AI analyzes essential physiological biomarkers, lifestyle metrics, and vitals 
+                    to predict cardiovascular disease risk with real-time confidence scoring and clinical guidance.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="checkup.html" class="btn-cta">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                        Start Check Up
+                    </a>
+                    <a href="about.html" class="btn-secondary">
+                        <i class="fa-solid fa-book-medical"></i>
+                        Learn About Project
+                    </a>
+                </div>
+
+                <!-- STATS STRIP -->
+                <div class="hero-stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">70,000+</div>
+                        <div class="stat-label">Clinical Training Samples</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">11</div>
+                        <div class="stat-label">Health Biomarkers Analyzed</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">~73%</div>
+                        <div class="stat-label">Model Test Accuracy</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">Instant</div>
+                        <div class="stat-label">Real-time Risk Evaluation</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================================================= -->
+            <!-- CORE PROJECT FEATURES -->
+            <!-- ================================================= -->
+            <h2 class="home-section-title">Key Capabilities of the System</h2>
+
+            <div class="features-grid">
+                <div class="feature-box">
+                    <div class="feature-icon-wrap">
+                        <i class="fa-solid fa-notes-medical"></i>
+                    </div>
+                    <h3>Multi-Factor Assessment</h3>
+                    <p>
+                        Evaluates 11 vital patient features including age, gender, BMI, systolic and diastolic blood pressure, cholesterol, glucose, and lifestyle factors (smoking, alcohol, physical activity).
+                    </p>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-icon-wrap emerald">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <h3>Machine Learning Engine</h3>
+                    <p>
+                        Utilizes a trained Logistic Regression classification model combined with StandardScaler feature transformation, providing calibrated probability estimates and robust risk categorization.
+                    </p>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-icon-wrap amber">
+                        <i class="fa-solid fa-clipboard-check"></i>
+                    </div>
+                    <h3>Actionable Guidance</h3>
+                    <p>
+                        Generates clinical recommendations tailored to the patient's blood pressure stage (AHA criteria), BMI classification, and specific metabolic and lifestyle risk indicators.
+                    </p>
+                </div>
+            </div>
+
+            <!-- ================================================= -->
+            <!-- HOW IT WORKS WORKFLOW -->
+            <!-- ================================================= -->
+            <h2 class="home-section-title">How the Prediction System Works</h2>
+
+            <div class="workflow-grid">
+                <div class="workflow-card">
+                    <div class="step-num-badge">1</div>
+                    <h4>Enter Patient Metrics</h4>
+                    <p>Input clinical vitals, body measurements, and lifestyle behaviors into the simple, guided assessment form.</p>
+                </div>
+
+                <div class="workflow-card">
+                    <div class="step-num-badge">2</div>
+                    <h4>ML Model Processing</h4>
+                    <p>StandardScaler standardizes feature scales and the trained Logistic Regression model calculates cardiac disease probability.</p>
+                </div>
+
+                <div class="workflow-card">
+                    <div class="step-num-badge">3</div>
+                    <h4>Receive Comprehensive Report</h4>
+                    <p>Get instant visual risk classification, animated risk gauge, BMI calculation, and individualized medical recommendations.</p>
+                </div>
+            </div>
+
+            <!-- CALL TO ACTION BANNER -->
+            <section class="card hero-card" style="padding: 36px 24px; margin-top: 16px;">
+                <h3 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 10px; color: #fff;">
+                    Ready for a Cardiovascular Risk Assessment?
+                </h3>
+                <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto 24px; font-size: 0.95rem;">
+                    Perform a quick, non-invasive risk check based on Machine Learning algorithms trained on comprehensive clinical patient data.
+                </p>
+                <a href="checkup.html" class="btn-cta" style="margin: 0 auto;">
+                    <i class="fa-solid fa-stethoscope"></i>
+                    Start Check Up Now
+                </a>
+            </section>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="site-footer">
+            <p>CardioRisk AI &copy; Cardiovascular Health Predictor &mdash; Machine Learning Clinical Assessment System</p>
+        </footer>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
