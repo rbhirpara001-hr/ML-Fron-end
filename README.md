@@ -1,4 +1,4 @@
-﻿# Cardiovascular Disease Prediction - ML Web Application
+# Cardiovascular Disease Prediction - ML Web Application
 
 An end-to-end Machine Learning web application designed to predict cardiovascular disease risk based on patient health metrics.
 
