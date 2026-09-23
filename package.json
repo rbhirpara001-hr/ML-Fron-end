@@ -2,7 +2,7 @@
   "name": "ml-frontend",
   "version": "1.0.0",
   "scripts": {
-    "build": "echo Build ready",
+    "build": "node build.js",
     "backend": "python backend/app.py",
     "frontend": "http-server frontend -p 5500",
     "dev": "concurrently \"npm run backend\" \"npm run frontend\""

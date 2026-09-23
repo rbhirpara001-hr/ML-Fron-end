@@ -7,12 +7,18 @@ from flask_cors import CORS
 
 
 # ============================================================
-# FLASK APP
+# FLASK APP & CORS CONFIGURATION
 # ============================================================
 
 app = Flask(__name__)
 
-CORS(app)
+# Enable CORS for all routes, supporting Vercel production domains and local dev
+CORS(
+    app,
+    resources={r"/*": {"origins": "*"}},
+    methods=["GET", "POST", "OPTIONS"],
+    allow_headers=["Content-Type", "Authorization"]
+)
 
 
 # ============================================================
@@ -958,8 +964,11 @@ if __name__ == "__main__":
         "Server running on:"
     )
 
+    port = int(os.environ.get("PORT", 5000))
+    debug = os.environ.get("FLASK_ENV") == "development"
+
     print(
-        "http://localhost:5000"
+        f"http://0.0.0.0:{port}"
     )
 
     print(
@@ -971,8 +980,8 @@ if __name__ == "__main__":
 
         host="0.0.0.0",
 
-        port=5000,
+        port=port,
 
-        debug=True
+        debug=debug
 
     )

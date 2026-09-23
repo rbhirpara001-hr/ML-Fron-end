@@ -1,8 +1,29 @@
-// Automatically use current origin in production (Vercel), or local Flask server during development
-const API_BASE_URL =
-    window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
-        ? "http://127.0.0.1:5000"
-        : "";
+// Resolve Backend API URL:
+// 1. Production backend URL injected via config.js (set via Vercel env variable BACKEND_URL or VITE_API_URL)
+// 2. Development fallback to local Flask server (http://127.0.0.1:5000)
+// 3. Fallback to current origin (same-origin relative)
+function resolveApiBaseUrl() {
+    if (typeof window !== "undefined" && window.__APP_CONFIG__ && window.__APP_CONFIG__.BACKEND_URL) {
+        const configuredUrl = window.__APP_CONFIG__.BACKEND_URL.trim();
+        if (configuredUrl && !configuredUrl.includes("YOUR-BACKEND-URL")) {
+            return configuredUrl.replace(/\/+$/, "");
+        }
+    }
+
+    if (
+        typeof window !== "undefined" &&
+        (window.location.hostname === "localhost" ||
+         window.location.hostname === "127.0.0.1" ||
+         window.location.protocol === "file:")
+    ) {
+        return "http://127.0.0.1:5000";
+    }
+
+    return "";
+}
+
+const API_BASE_URL = resolveApiBaseUrl();
+console.log("Connected API Base URL:", API_BASE_URL || "(relative origin)");
 
 
 document.addEventListener(
