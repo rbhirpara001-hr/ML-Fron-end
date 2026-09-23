@@ -1,279 +1,201 @@
-// Resolve Backend API URL:
-// 1. Production backend URL injected via config.js (set via Vercel env variable BACKEND_URL or VITE_API_URL)
-// 2. Development fallback to local Flask server (http://127.0.0.1:5000)
-// 3. Fallback to current origin (same-origin relative)
-function resolveApiBaseUrl() {
-    if (typeof window !== "undefined" && window.__APP_CONFIG__ && window.__APP_CONFIG__.BACKEND_URL) {
-        const configuredUrl = window.__APP_CONFIG__.BACKEND_URL.trim();
-        if (configuredUrl && !configuredUrl.includes("YOUR-BACKEND-URL")) {
-            return configuredUrl.replace(/\/+$/, "");
-        }
-    }
+// =====================================================
+// BACKEND API URL
+// =====================================================
 
-    if (
-        typeof window !== "undefined" &&
-        (window.location.hostname === "localhost" ||
-         window.location.hostname === "127.0.0.1" ||
-         window.location.protocol === "file:")
-    ) {
-        return "http://127.0.0.1:5000";
-    }
+const API_BASE_URL = "https://cardiorisk-backend.onrender.com";
 
-    return "";
-}
-
-const API_BASE_URL = resolveApiBaseUrl();
-console.log("Connected API Base URL:", API_BASE_URL || "(relative origin)");
+console.log("Connected API Base URL:", API_BASE_URL);
 
 
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
+// =====================================================
+// DOM CONTENT LOADED
+// =====================================================
 
-        // =====================================================
-        // ELEMENTS
-        // =====================================================
+document.addEventListener("DOMContentLoaded", () => {
 
-        const form =
-            document.getElementById("predictionForm");
+    // =====================================================
+    // ELEMENTS
+    // =====================================================
 
-        const heightInput =
-            document.getElementById("height");
+    const form = document.getElementById("predictionForm");
 
-        const weightInput =
-            document.getElementById("weight");
+    const heightInput = document.getElementById("height");
+    const weightInput = document.getElementById("weight");
 
+    const liveBmi = document.getElementById("liveBmi");
+    const liveBmiBadge = document.getElementById("liveBmiBadge");
 
-        const liveBmi =
-            document.getElementById("liveBmi");
+    const emptyState = document.getElementById("emptyState");
+    const loadingState = document.getElementById("loadingState");
+    const resultContent = document.getElementById("resultContent");
 
-        const liveBmiBadge =
-            document.getElementById("liveBmiBadge");
+    const riskLabel = document.getElementById("riskLabel");
+    const riskPercent = document.getElementById("riskPercent");
+    const gaugeRing = document.getElementById("gaugeRing");
 
+    const riskBadgeBox = document.getElementById("riskBadgeBox");
+    const riskBadgeText = document.getElementById("riskBadgeText");
 
-        const emptyState =
-            document.getElementById("emptyState");
+    const resBmi = document.getElementById("resBmi");
+    const resBmiCat = document.getElementById("resBmiCat");
 
-        const loadingState =
-            document.getElementById("loadingState");
+    const resBp = document.getElementById("resBp");
+    const resBpCat = document.getElementById("resBpCat");
 
-        const resultContent =
-            document.getElementById("resultContent");
+    const recommendationsList =
+        document.getElementById("recommendationsList");
 
-
-        const riskLabel =
-            document.getElementById("riskLabel");
-
-        const riskPercent =
-            document.getElementById("riskPercent");
-
-        const gaugeRing =
-            document.getElementById("gaugeRing");
+    const serverStatus =
+        document.getElementById("serverStatus");
 
 
-        const riskBadgeBox =
-            document.getElementById("riskBadgeBox");
+    // =====================================================
+    // BACKEND HEALTH CHECK
+    // =====================================================
 
-        const riskBadgeText =
-            document.getElementById("riskBadgeText");
+    checkBackendHealth();
 
+    async function checkBackendHealth() {
 
-        const resBmi =
-            document.getElementById("resBmi");
+        try {
 
-        const resBmiCat =
-            document.getElementById("resBmiCat");
-
-
-        const resBp =
-            document.getElementById("resBp");
-
-        const resBpCat =
-            document.getElementById("resBpCat");
-
-
-        const recommendationsList =
-            document.getElementById(
-                "recommendationsList"
+            const response = await fetch(
+                `${API_BASE_URL}/api/health`
             );
 
+            if (!response.ok) {
 
-        const serverStatus =
-            document.getElementById(
-                "serverStatus"
-            );
-
-
-        // =====================================================
-        // BACKEND HEALTH
-        // =====================================================
-
-        checkBackendHealth();
-
-
-        async function checkBackendHealth() {
-
-            try {
-
-                const response =
-                    await fetch(
-                        `${API_BASE_URL}/api/health`
-                    );
-
-
-                if (!response.ok) {
-
-                    throw new Error(
-                        "Backend health check failed"
-                    );
-
-                }
-
-
-                const data =
-                    await response.json();
-
-
-                console.log(
-                    "Backend Health:",
-                    data
+                throw new Error(
+                    "Backend health check failed"
                 );
-
-
-                if (
-                    data.status === "healthy" &&
-                    data.model_loaded === true &&
-                    data.scaler_loaded === true
-                ) {
-
-                    if (serverStatus) {
-                        serverStatus.innerHTML =
-                            '<span class="status-dot online"></span>' +
-                            '<span class="status-text">' +
-                            'Backend API Connected' +
-                            '</span>';
-                    }
-
-                }
-
-                else {
-
-                    throw new Error(
-                        "Model or scaler is not loaded"
-                    );
-
-                }
 
             }
 
-            catch (error) {
+            const data = await response.json();
 
-                console.error(
-                    "Backend connection error:",
-                    error
-                );
-
-
-                if (serverStatus) {
-                    serverStatus.innerHTML =
-                        '<span class="status-dot" ' +
-                        'style="background:#f43f5e"></span>' +
-                        '<span class="status-text" ' +
-                        'style="color:#f43f5e">' +
-                        'Backend Offline' +
-                        '</span>';
-                }
-
-            }
-
-        }
-
-
-        // =====================================================
-        // LIVE BMI
-        // =====================================================
-
-        function updateLiveBmi() {
-
-            const height =
-                parseFloat(
-                    heightInput.value
-                ) || 0;
-
-
-            const weight =
-                parseFloat(
-                    weightInput.value
-                ) || 0;
+            console.log(
+                "Backend Health:",
+                data
+            );
 
 
             if (
-                height > 0 &&
-                weight > 0
+                data.status === "healthy" &&
+                data.model_loaded === true &&
+                data.scaler_loaded === true
             ) {
 
-                const bmi =
-                    weight /
-                    ((height / 100) ** 2);
+                if (serverStatus) {
 
-
-                const roundedBmi =
-                    bmi.toFixed(1);
-
-
-                liveBmi.textContent =
-                    `${roundedBmi} kg/m²`;
-
-
-                if (bmi < 18.5) {
-
-                    liveBmiBadge.textContent =
-                        "Underweight";
-
-                    liveBmiBadge.className =
-                        "bmi-badge warning";
+                    serverStatus.innerHTML =
+                        '<span class="status-dot online"></span>' +
+                        '<span class="status-text">' +
+                        'Backend API Connected' +
+                        '</span>';
 
                 }
 
-                else if (bmi < 25) {
+            } else {
 
-                    liveBmiBadge.textContent =
-                        "Normal";
+                throw new Error(
+                    "Model or scaler is not loaded"
+                );
 
-                    liveBmiBadge.className =
-                        "bmi-badge normal";
+            }
 
-                }
+        } catch (error) {
 
-                else if (bmi < 30) {
+            console.error(
+                "Backend connection error:",
+                error
+            );
 
-                    liveBmiBadge.textContent =
-                        "Overweight";
 
-                    liveBmiBadge.className =
-                        "bmi-badge warning";
+            if (serverStatus) {
 
-                }
+                serverStatus.innerHTML =
+                    '<span class="status-dot" ' +
+                    'style="background:#f43f5e"></span>' +
+                    '<span class="status-text" ' +
+                    'style="color:#f43f5e">' +
+                    'Backend Offline' +
+                    '</span>';
 
-                else {
+            }
 
-                    liveBmiBadge.textContent =
-                        "Obese";
+        }
 
-                    liveBmiBadge.className =
-                        "bmi-badge warning";
+    }
 
-                }
+
+    // =====================================================
+    // LIVE BMI
+    // =====================================================
+
+    function updateLiveBmi() {
+
+        const height =
+            parseFloat(
+                heightInput.value
+            ) || 0;
+
+        const weight =
+            parseFloat(
+                weightInput.value
+            ) || 0;
+
+
+        if (
+            height > 0 &&
+            weight > 0
+        ) {
+
+            const bmi =
+                weight /
+                ((height / 100) ** 2);
+
+            const roundedBmi =
+                bmi.toFixed(1);
+
+
+            liveBmi.textContent =
+                `${roundedBmi} kg/m²`;
+
+
+            if (bmi < 18.5) {
+
+                liveBmiBadge.textContent =
+                    "Underweight";
+
+                liveBmiBadge.className =
+                    "bmi-badge warning";
+
+            }
+
+            else if (bmi < 25) {
+
+                liveBmiBadge.textContent =
+                    "Normal";
+
+                liveBmiBadge.className =
+                    "bmi-badge normal";
+
+            }
+
+            else if (bmi < 30) {
+
+                liveBmiBadge.textContent =
+                    "Overweight";
+
+                liveBmiBadge.className =
+                    "bmi-badge warning";
 
             }
 
             else {
 
-                liveBmi.textContent =
-                    "-- kg/m²";
-
                 liveBmiBadge.textContent =
-                    "--";
+                    "Obese";
 
                 liveBmiBadge.className =
                     "bmi-badge warning";
@@ -282,34 +204,53 @@ document.addEventListener(
 
         }
 
+        else {
 
-        if (heightInput && weightInput) {
-            heightInput.addEventListener(
-                "input",
-                updateLiveBmi
-            );
+            liveBmi.textContent =
+                "-- kg/m²";
 
+            liveBmiBadge.textContent =
+                "--";
 
-            weightInput.addEventListener(
-                "input",
-                updateLiveBmi
-            );
+            liveBmiBadge.className =
+                "bmi-badge warning";
 
-
-            updateLiveBmi();
         }
 
+    }
 
-        // =====================================================
-        // FORM SUBMIT
-        // =====================================================
 
-        if (form) {
-            form.addEventListener(
-                "submit",
-                async (e) => {
+    if (
+        heightInput &&
+        weightInput
+    ) {
 
-                    e.preventDefault();
+        heightInput.addEventListener(
+            "input",
+            updateLiveBmi
+        );
+
+        weightInput.addEventListener(
+            "input",
+            updateLiveBmi
+        );
+
+        updateLiveBmi();
+
+    }
+
+
+    // =====================================================
+    // FORM SUBMIT
+    // =====================================================
+
+    if (form) {
+
+        form.addEventListener(
+            "submit",
+            async (e) => {
+
+                e.preventDefault();
 
 
                 console.log(
@@ -429,14 +370,13 @@ document.addEventListener(
                 try {
 
                     // =============================================
-                    // SEND REQUEST
+                    // SEND REQUEST TO RENDER BACKEND
                     // =============================================
 
                     const response =
                         await fetch(
                             `${API_BASE_URL}/api/predict`,
                             {
-
                                 method: "POST",
 
                                 headers: {
@@ -448,7 +388,6 @@ document.addEventListener(
                                     JSON.stringify(
                                         payload
                                     )
-
                             }
                         );
 
@@ -527,161 +466,159 @@ document.addEventListener(
 
             }
         );
+
     }
 
 
-        // =====================================================
-        // RENDER RESULTS
-        // =====================================================
+    // =====================================================
+    // RENDER RESULTS
+    // =====================================================
 
-        function renderResults(data) {
+    function renderResults(data) {
 
-            loadingState.classList.add(
-                "hidden"
+        loadingState.classList.add(
+            "hidden"
+        );
+
+        resultContent.classList.remove(
+            "hidden"
+        );
+
+
+        // =================================================
+        // RISK
+        // =================================================
+
+        const probability =
+            Number(
+                data.risk_probability
             );
 
-            resultContent.classList.remove(
-                "hidden"
-            );
+
+        const isHigh =
+            data.prediction === 1;
 
 
-            // =================================================
-            // RISK
-            // =================================================
-
-            const probability =
-                Number(
-                    data.risk_probability
-                );
+        riskLabel.textContent =
+            data.risk_label;
 
 
-            const isHigh =
-                data.prediction === 1;
+        riskPercent.textContent =
+            `${probability}%`;
 
 
-            riskLabel.textContent =
-                data.risk_label;
+        // =================================================
+        // GAUGE
+        // =================================================
+
+        const angle =
+            (probability / 100) * 360;
 
 
-            riskPercent.textContent =
-                `${probability}%`;
+        const color =
+            isHigh
+                ? "#f43f5e"
+                : "#10b981";
 
 
-            // =================================================
-            // GAUGE
-            // =================================================
-
-            const angle =
-                (probability / 100) * 360;
-
-
-            const color =
-                isHigh
-                    ? "#f43f5e"
-                    : "#10b981";
+        gaugeRing.style.background =
+            `conic-gradient(
+                ${color} 0deg ${angle}deg,
+                rgba(255,255,255,0.05)
+                ${angle}deg
+            )`;
 
 
-            gaugeRing.style.background =
-                `conic-gradient(
-                    ${color} 0deg ${angle}deg,
-                    rgba(255,255,255,0.05)
-                    ${angle}deg
-                )`;
+        gaugeRing.style.boxShadow =
+            isHigh
+                ? "0 0 30px rgba(244,63,94,0.3)"
+                : "0 0 30px rgba(16,185,129,0.3)";
 
 
-            gaugeRing.style.boxShadow =
-                isHigh
-                    ? "0 0 30px rgba(244,63,94,0.3)"
-                    : "0 0 30px rgba(16,185,129,0.3)";
+        // =================================================
+        // RISK BADGE
+        // =================================================
+
+        if (isHigh) {
+
+            riskBadgeBox.className =
+                "risk-badge-box high-risk";
+
+            riskBadgeText.textContent =
+                "High Cardiovascular Disease Risk";
+
+        }
+
+        else {
+
+            riskBadgeBox.className =
+                "risk-badge-box low-risk";
+
+            riskBadgeText.textContent =
+                "Low Cardiovascular Disease Risk";
+
+        }
 
 
-            // =================================================
-            // RISK BADGE
-            // =================================================
+        // =================================================
+        // HEALTH METRICS
+        // =================================================
 
-            if (isHigh) {
+        if (data.health_metrics) {
 
-                riskBadgeBox.className =
-                    "risk-badge-box high-risk";
-
-
-                riskBadgeText.textContent =
-                    "High Cardiovascular Disease Risk";
-
-            }
-
-            else {
-
-                riskBadgeBox.className =
-                    "risk-badge-box low-risk";
+            resBmi.textContent =
+                `${data.health_metrics.bmi} kg/m²`;
 
 
-                riskBadgeText.textContent =
-                    "Low Cardiovascular Disease Risk";
-
-            }
+            resBmiCat.textContent =
+                data.health_metrics.bmi_category;
 
 
-            // =================================================
-            // HEALTH METRICS
-            // =================================================
-
-            if (data.health_metrics) {
-
-                resBmi.textContent =
-                    `${data.health_metrics.bmi} kg/m²`;
+            resBp.textContent =
+                `${data.health_metrics.systolic_bp} / ` +
+                `${data.health_metrics.diastolic_bp}`;
 
 
-                resBmiCat.textContent =
-                    data.health_metrics.bmi_category;
+            resBpCat.textContent =
+                data.health_metrics.bp_category;
+
+        }
 
 
-                resBp.textContent =
-                    `${data.health_metrics.systolic_bp} / ` +
-                    `${data.health_metrics.diastolic_bp}`;
+        // =================================================
+        // RECOMMENDATIONS
+        // =================================================
+
+        recommendationsList.innerHTML = "";
 
 
-                resBpCat.textContent =
-                    data.health_metrics.bp_category;
+        if (
+            data.recommendations &&
+            data.recommendations.length > 0
+        ) {
 
-            }
+            data.recommendations.forEach(
+                (recommendation) => {
 
-
-            // =================================================
-            // RECOMMENDATIONS
-            // =================================================
-
-            recommendationsList.innerHTML = "";
-
-
-            if (
-                data.recommendations &&
-                data.recommendations.length > 0
-            ) {
-
-                data.recommendations.forEach(
-                    (recommendation) => {
-
-                        const li =
-                            document.createElement(
-                                "li"
-                            );
-
-
-                        li.textContent =
-                            recommendation;
-
-
-                        recommendationsList.appendChild(
-                            li
+                    const li =
+                        document.createElement(
+                            "li"
                         );
 
-                    }
-                );
 
-            }
+                    li.textContent =
+                        recommendation;
+
+
+                    recommendationsList.appendChild(
+                        li
+                    );
+
+                }
+            );
 
         }
 
     }
-);
+
+});
